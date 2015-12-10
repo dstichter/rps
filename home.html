@@ -2,20 +2,40 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/animation.css">
+<link rel="stylesheet" type="text/css" href="css/font-awesome-4.5.0/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="css/extra-shapes.css">
   <title></title>
 </head>
 <body>
   <div class='container'>
+    <div class='row' id='gameDiv'>
+      <div class='col-md-3' id='computerDisplayDiv'>
+        <div class='fa fa-rebel fa-5x'></div>
+        <h1 id='computerDisplay'></h1>
+      </div>
+      <div class='col-md-1' id='roundDisplay'>
+        <h4>Round</h4>
+        <br>
+        <h1 id='round'></h1>
+      </div>
+      <div class='col-md-3' id='userDisplayDiv'>
+        <div class='fa fa-street-view fa-5x'></div>
+        <h1 id='userDisplay'></h1>
+      </div>
+      <div class='col-md-4'>
+        <button class='btn btn-info' id='clear'>Clear</button>
+        <button class='btn btn-success' id='toggleBtn' data-state="off">Start Game</button>
+        <p id='userScore'>Player Score: </p>
+        <p id='computerScore'>Computer Score: </p>
+      </div>
+    </div>
     <div class='row'>
-    <button class='btn' id='userRock'>Rock</button>
-    <button class='btn' id='userPaper'>Paper</button>
-    <button class='btn' id='userSissor'>Sissors</button>
-    <button class='btn' id='clear'>Clear</button>
-
-
-    <p id='round'>Round: </p>
-    <p id='userScore'>User: </p>
-    <p id='computerScore'>Computer: </p>
+      <div class='col-md-7 text-center'>
+        <button data-state='Rock' class='btn btn-warning fa fa-hand-rock-o fa-3x' id='userRock'></button>
+        <button data-state='Paper' class='btn btn-warning fa fa-hand-paper-o fa-3x' id='userPaper'></button>
+        <button data-state='Sissors' class='btn btn-warning fa fa-hand-scissors-o fa-3x' id='userSissor'></button>
+      </div>
     </div>
   </div>
 
