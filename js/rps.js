@@ -57,13 +57,19 @@ $(document).ready(function(){
       userScore++
     }
     if($(this).data('state') === ranCompChoice){
-      alert('tie')
+      
     }
     round++
-    $('#computerDisplay').html(ranCompChoice)
-    $('#userDisplay').html($(this).data('state'))
+    choiceAnimation(ranCompChoice, $(this).data('state'));
     $('#round').html(round)
     $('#userScore').html('Player Score: ' + userScore)
     $('#computerScore').html('Computer Score: ' + computerScore) 
   }
+
+  function choiceAnimation(computer, user){
+    var faIcon = "fa fa-" + computer + "-o fa-5x"
+    $('#computerDisplay').addClass(faIcon)
+    faIcon = "fa fa-" + user + "-o fa-5x"
+    $('#userDisplay').addClass(faIcon)
+  };
 });
