@@ -32,7 +32,6 @@ $(document).ready(function(){
         eventListeners()
         totalRounds = roundCheck;
         $('#numRounds').hide()
-        $('#myModal').modal('show')
       }
       else{
         alert('NaN')
@@ -82,10 +81,14 @@ $(document).ready(function(){
       round++
       $('#userScore').html('Player Score: ' + userScore)
       $('#computerScore').html('Computer Score: ' + computerScore)
-    } 
-
-
-
+    }   
+    if(userScore === computerScore && round === totalRounds){
+      $('#tieModal').modal('show')
+      totalRounds++
+    }
+    else if(round === totalRounds) {
+      gameOverModal()
+    }
   }
 
   function choiceAnimation(computer, user){
@@ -96,4 +99,24 @@ $(document).ready(function(){
     faIcon = "fa fa-hand-" + userLowerCase + "-o fa-5x fadeIn"
     $('#userDisplay').append($('<div>').addClass(faIcon));
   };
+
+  function gameOverModal(){
+    if(computerScore > userScore){
+      $('#gameOver').empty()
+      $('#gameOver').append($('<h2>').html('Computer Wins'))
+    }
+    if(userScore > computerScore){
+      $('#gameOver').empty()
+      $('#gameOver').append($('<h2>').html('You Win'))
+    }
+
+    $('#gameoverModal').modal('show')
+    $('.btn-primary').on('click',function(){
+      round = 1
+      computerScore = 0
+      userScore = 0
+      $('#computerDisplay').empty()
+      $('#userDisplay').empty()
+    });
+  }
 });
