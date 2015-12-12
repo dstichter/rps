@@ -1,8 +1,11 @@
 $(document).ready(function(){
 //variables
-  var round = 0;
+  var round = 1;
   var computerScore = 0;
   var userScore = 0;
+  var totalRounds = 0
+  $('#clear').hide()
+  $('#finalRound').hide()
 //ToggleButton Event Listner  
   $('#toggleBtn').on('click', toggle);
 //Function Calls
@@ -22,9 +25,18 @@ $(document).ready(function(){
 
   function toggle(){
     if($(this).data('state') === 'off'){
-      $(this).toggleClass('btn-danger btn-success');
-      $(this).data('state', 'on')
-      eventListeners()
+      var roundCheck = parseInt($('#numRounds').val(), 10)
+      if(Number.isInteger(roundCheck)){
+        $(this).toggleClass('btn-danger btn-success');
+        $(this).data('state', 'on')
+        eventListeners()
+        totalRounds = roundCheck;
+        $('#numRounds').hide()
+        $('#myModal').modal('show')
+      }
+      else{
+        alert('NaN')
+      }
     }
     else{
       $(this).toggleClass('btn-danger btn-success');
@@ -35,37 +47,45 @@ $(document).ready(function(){
   }
 
   function gameLogic(){
-    var computerChoices = ['Rock', 'Paper', 'Scissors'];
-    var ranNum = Math.floor(Math.random() * computerChoices.length);
-    var ranCompChoice = computerChoices[ranNum];
-    if($(this).data('state') === "Rock" && ranCompChoice === "Paper"){
-      computerScore++
-    }
-    if($(this).data('state') === "Paper" && ranCompChoice === "Scissors"){
-      computerScore++
-    }
-    if($(this).data('state') === "Scissors" && ranCompChoice === "Rock"){
-      computerScore++
-    }
-    if($(this).data('state') === "Rock" && ranCompChoice === "Scissors"){
-      userScore++
-    }
-    if($(this).data('state') === "Paper" && ranCompChoice === "Rock"){
-      userScore++
-    }
-    if($(this).data('state') === "Scissors" && ranCompChoice === "Paper"){
-      userScore++
-    }
-    if($(this).data('state') === ranCompChoice){
-      
-    }
-    round++
-    $('#computerDisplay').empty()
-    $('#userDisplay').empty()
-    choiceAnimation(ranCompChoice, $(this).data('state'));
-    $('#round').html(round)
-    $('#userScore').html('Player Score: ' + userScore)
-    $('#computerScore').html('Computer Score: ' + computerScore) 
+    if(round <= totalRounds){
+      if(round === totalRounds){
+        $('#finalRound').show()
+      }
+      var computerChoices = ['Rock', 'Paper', 'Scissors'];
+      var ranNum = Math.floor(Math.random() * computerChoices.length);
+      var ranCompChoice = computerChoices[ranNum];
+      if($(this).data('state') === "Rock" && ranCompChoice === "Paper"){
+        computerScore++
+      }
+      if($(this).data('state') === "Paper" && ranCompChoice === "Scissors"){
+        computerScore++
+      }
+      if($(this).data('state') === "Scissors" && ranCompChoice === "Rock"){
+        computerScore++
+      }
+      if($(this).data('state') === "Rock" && ranCompChoice === "Scissors"){
+        userScore++
+      }
+      if($(this).data('state') === "Paper" && ranCompChoice === "Rock"){
+        userScore++
+      }
+      if($(this).data('state') === "Scissors" && ranCompChoice === "Paper"){
+        userScore++
+      }
+      if($(this).data('state') === ranCompChoice){
+        
+      }
+      $('#computerDisplay').empty()
+      $('#userDisplay').empty()
+      choiceAnimation(ranCompChoice, $(this).data('state'));
+      $('#round').html(round)
+      round++
+      $('#userScore').html('Player Score: ' + userScore)
+      $('#computerScore').html('Computer Score: ' + computerScore)
+    } 
+
+
+
   }
 
   function choiceAnimation(computer, user){
