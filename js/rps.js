@@ -35,25 +35,25 @@ $(document).ready(function(){
   }
 
   function gameLogic(){
-    var computerChoices = ['Rock', 'Paper', 'Sissors'];
+    var computerChoices = ['Rock', 'Paper', 'Scissors'];
     var ranNum = Math.floor(Math.random() * computerChoices.length);
     var ranCompChoice = computerChoices[ranNum];
     if($(this).data('state') === "Rock" && ranCompChoice === "Paper"){
       computerScore++
     }
-    if($(this).data('state') === "Paper" && ranCompChoice === "Sissors"){
+    if($(this).data('state') === "Paper" && ranCompChoice === "Scissors"){
       computerScore++
     }
-    if($(this).data('state') === "Sissors" && ranCompChoice === "Rock"){
+    if($(this).data('state') === "Scissors" && ranCompChoice === "Rock"){
       computerScore++
     }
-    if($(this).data('state') === "Rock" && ranCompChoice === "Sissors"){
+    if($(this).data('state') === "Rock" && ranCompChoice === "Scissors"){
       userScore++
     }
     if($(this).data('state') === "Paper" && ranCompChoice === "Rock"){
       userScore++
     }
-    if($(this).data('state') === "Sissors" && ranCompChoice === "Paper"){
+    if($(this).data('state') === "Scissors" && ranCompChoice === "Paper"){
       userScore++
     }
     if($(this).data('state') === ranCompChoice){
@@ -67,9 +67,13 @@ $(document).ready(function(){
   }
 
   function choiceAnimation(computer, user){
-    var faIcon = "fa fa-" + computer + "-o fa-5x"
+    var compLowerCase = computer.toLowerCase();
+    var userLowerCase = user.toLowerCase();
+    var faIcon = "fa fa-hand-" + compLowerCase + "-o fa-5x"
+    $('#computerDisplay').removeClass()
     $('#computerDisplay').addClass(faIcon)
-    faIcon = "fa fa-" + user + "-o fa-5x"
+    faIcon = "fa fa-hand-" + userLowerCase + "-o fa-5x"
+    $('#userDisplay').removeClass()
     $('#userDisplay').addClass(faIcon)
   };
 });
