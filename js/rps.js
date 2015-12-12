@@ -60,6 +60,8 @@ $(document).ready(function(){
       
     }
     round++
+    $('#computerDisplay').empty()
+    $('#userDisplay').empty()
     choiceAnimation(ranCompChoice, $(this).data('state'));
     $('#round').html(round)
     $('#userScore').html('Player Score: ' + userScore)
@@ -69,11 +71,9 @@ $(document).ready(function(){
   function choiceAnimation(computer, user){
     var compLowerCase = computer.toLowerCase();
     var userLowerCase = user.toLowerCase();
-    var faIcon = "fa fa-hand-" + compLowerCase + "-o fa-5x"
-    $('#computerDisplay').removeClass()
-    $('#computerDisplay').addClass(faIcon)
-    faIcon = "fa fa-hand-" + userLowerCase + "-o fa-5x"
-    $('#userDisplay').removeClass()
-    $('#userDisplay').addClass(faIcon)
+    var faIcon = "fa fa-hand-" + compLowerCase + "-o fa-5x fadeIn"
+    $('#computerDisplay').append($('<div>').addClass(faIcon));
+    faIcon = "fa fa-hand-" + userLowerCase + "-o fa-5x fadeIn"
+    $('#userDisplay').append($('<div>').addClass(faIcon));
   };
 });
