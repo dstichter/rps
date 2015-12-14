@@ -6,7 +6,6 @@ $(document).ready(function(){
   var userScore = 0;
   var totalRounds = 0
   $('#clear').hide()
-  $('#finalRound').hide()
   $('#totalRoundsDisplay').hide()
 //ToggleButton Event Listner  
   $('#toggleBtn').on('click', toggle);
@@ -114,15 +113,24 @@ $(document).ready(function(){
       $('#gameOver').empty()
       $('#gameOver').append($('<h2>').html('You Win'))
     }
-console.log('you here?')
     $('#gameOverModal').modal('show')
-    //$('#tieModal').modal('show')
     $('.btn-primary').on('click',function(){
+      $('#gameOverModal').modal('hide')
       round = 1
       computerScore = 0
       userScore = 0
+      totalRounds = 0
       $('#computerDisplay').empty()
       $('#userDisplay').empty()
+      $('#numRounds').val('')
+      $('#numRounds').show()
+      $('#userScore').html('Player Score: ')
+      $('#computerScore').html('Computer Score: ')
+      $('#toggleBtn').toggleClass('btn-danger btn-success');
+      $('#toggleBtn').data('state', 'off')
+      $('#toggleBtn').html('Start')
+      $('#totalRoundDisplay').html('')
+      $('#round').html('')
     });
   }
 });
