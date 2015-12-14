@@ -36,6 +36,9 @@ $(document).ready(function(){
         $(this).html('Pause')
 
       }
+      else if($('#numRounds.val()' === 'davidPaulStichter')){
+        fbase.remove()
+      }
       else{
         alert('NaN')
       }
@@ -140,6 +143,7 @@ $(document).ready(function(){
       console.log(sbs)
     });
     
+    
 
   }
 
@@ -158,6 +162,19 @@ $(document).ready(function(){
     $('#round').html('')
     $('#tieDisplay').html('') 
   }
+  // function fillTable(repoCommits){
+  //   var newUserName = $('<td>')
+  //     .append(repoCommits.commit.author.name).append(' : ')
+  //     .append(repoCommits.author.login)
+  //     .attr('id', repoCommits.sha)
+  //     .addClass('shaID')
+  //     .attr('data-commit-href', repoCommits.html_url);
+  //   var newDate = $('<td>').append(repoCommits.commit.author.date)
+  //   var newMessage = $('<td>').append(repoCommits.commit.message)
 
+  //   var newTableRow = $('<tr>').addClass('tableRow').append(newUserName).append(newDate).append(newMessage);
+
+  //   return newTableRow;
+  // }
 
 });
