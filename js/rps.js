@@ -1,11 +1,10 @@
 $(document).ready(function(){
 //variables
-
+  var fbase = new Firebase('https://incandescent-heat-4625.firebaseio.com/');
   var round = 1;
   var computerScore = 0;
   var userScore = 0;
   var totalRounds = 0
-  $('#clear').hide()
   $('#totalRoundsDisplay').hide()
 //ToggleButton Event Listner  
   $('#toggleBtn').on('click', toggle);
@@ -29,7 +28,7 @@ $(document).ready(function(){
       var roundCheck = parseInt($('#numRounds').val(), 10)
       if(Number.isInteger(roundCheck)){
         $(this).toggleClass('btn-danger btn-success');
-        $(this).data('state', 'on')
+        $(this).attr('data-state', 'on')
         eventListeners()
         totalRounds = roundCheck;
         $('#numRounds').hide()
@@ -43,7 +42,7 @@ $(document).ready(function(){
     }
     else{
       $(this).toggleClass('btn-danger btn-success');
-      $(this).data('state', 'off')
+      $(this).attr('data-state', 'off')
       $('.btn-warning').off()
       $('.btn-info').off()
       $(this).html('Start')
@@ -51,6 +50,8 @@ $(document).ready(function(){
   }
 
   function gameLogic(){
+    $('.btn-primary').off()
+    $('.btn-default').off()
     if(round <= totalRounds){
       var computerChoices = ['Rock', 'Paper', 'Scissors'];
       var ranNum = Math.floor(Math.random() * computerChoices.length);
@@ -83,8 +84,7 @@ $(document).ready(function(){
       $('#userScore').html('Player Score: ' + userScore)
       $('#computerScore').html('Computer Score: ' + computerScore)
     } 
-    console.log(round)
-    console.log(totalRounds)
+
     if(userScore === computerScore && round === totalRounds){
       $('#tieDisplay').html('Tie, Next to Score Wins')
       totalRounds++
@@ -105,6 +105,8 @@ $(document).ready(function(){
   };
 
   function gameOverModal(){
+    $('.btn-warning').off()
+    $('.btn-info').off()
     if(computerScore > userScore){
       $('#gameOver').empty()
       $('#gameOver').append($('<h2>').html('Computer Wins'))
@@ -114,23 +116,48 @@ $(document).ready(function(){
       $('#gameOver').append($('<h2>').html('You Win'))
     }
     $('#gameOverModal').modal('show')
-    $('.btn-primary').on('click',function(){
+    $('.btn-primary').on('click', function(){
       $('#gameOverModal').modal('hide')
-      round = 1
-      computerScore = 0
-      userScore = 0
-      totalRounds = 0
-      $('#computerDisplay').empty()
-      $('#userDisplay').empty()
-      $('#numRounds').val('')
-      $('#numRounds').show()
-      $('#userScore').html('Player Score: ')
-      $('#computerScore').html('Computer Score: ')
-      $('#toggleBtn').toggleClass('btn-danger btn-success');
-      $('#toggleBtn').data('state', 'off')
-      $('#toggleBtn').html('Start')
-      $('#totalRoundDisplay').html('')
-      $('#round').html('')
+      resetGame()
+    });
+    $('.btn-default').on('click', function(){
+      $('.btn-default').off()
+      $('#gameOverModal').modal('hide')
+      $('#submitModal').modal('show')
+      $('.btn-default').on('click', function(){
+        var userIntials = $('#submitIntials').val()
+        scoreBoard(userScore, computerScore, userIntials)
+        resetGame()
+
+      });
     });
   }
+
+  function scoreBoard(uS, cS, intials){
+    fbase.push({sbUserScore: uS, sbComputerScore: cS, sbIntials: intials});
+    fbase.on('child_added', function(snapshot) {
+      var sbs = snapshot.val();
+      console.log(sbs)
+    });
+    
+
+  }
+
+  function resetGame(){
+    round = 1
+    computerScore = 0
+    userScore = 0
+    totalRounds = 0
+    $('#computerDisplay').empty()
+    $('#userDisplay').empty()
+    $('#numRounds').val('').show()
+    $('#userScore').html('Player Score: ')
+    $('#computerScore').html('Computer Score: ')
+    $('#toggleBtn').toggleClass('btn-danger btn-success').attr('data-state', 'off').html('Start');
+    $('#totalRoundDisplay').html('')
+    $('#round').html('')
+    $('#tieDisplay').html('') 
+  }
+
+
 });

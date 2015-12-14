@@ -42,6 +42,13 @@
         <button data-state='Scissors' class='btn btn-warning fa fa-hand-scissors-o fa-3x' id='userScissor'></button>
       </div>
     </div>
+    <div class='row'>
+      <div class='col-md-7'>
+        <div>
+          <p>Score Board</p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!--Game over Modal -->
@@ -56,14 +63,31 @@
           <div>Next Point Wins</div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default"\>Close</button>
+          <button type="button" class="btn btn-default"\>Submit Score</button>
           <button type="button" class="btn btn-primary"\>Play Again</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
 
+  <div id='submitModal' class="modal fade" tabindex="1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Submit</h4>
+        </div>
+        <div class="modal-body">
+          <div><input type="text" autocorrect="off" placeholder="Intials" id='submitIntials'></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default"\>Submit Score</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
   <script type="text/javascript" src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script type="text/javascript" src='js/rps.js'></script>
