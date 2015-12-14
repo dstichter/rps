@@ -17,10 +17,10 @@
         <div id='computerDisplay'> </div>
       </div>
       <div class='col-md-1' id='roundDisplay'>
-        <h4>Round</h4>
+        <h4 id='totalRoundDisplay'></h4>
         <br>
         <h1 id='round'></h1>
-        <h4 id='finalRound'>Final Round</h4>
+        <h6 id='tieDisplay'></h6>
       </div>
       <div class='col-md-3' id='userDisplayDiv'>
         <div class='fa fa-street-view fa-5x'></div>
@@ -44,8 +44,9 @@
       </div>
     </div>
   </div>
-<!--Game over Modal -->
-  <div id='gameOverModal' class="modal fade" tabindex="-1" role="dialog">
+
+  <!--Game over Modal -->
+  <div id='gameOverModal' class="modal fade" tabindex="1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -53,29 +54,11 @@
           <h4 class="modal-title">Game Over</h4>
         </div>
         <div id='gameOver'class="modal-body">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default">Close</button>
-          <button type="button" class="btn btn-default">Submit Score</button>
-          <button type="button" class="btn btn-primary">Play Again?</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-  <!--Tie Modal -->
-  <div id='tieModal' class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Game Is A Tie</h4>
-        </div>
-        <div id='tie'class="modal-body">
           <div>Next Point Wins</div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default"\>Close</button>
+          <button type="button" class="btn btn-default"\>Close</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

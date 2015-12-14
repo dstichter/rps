@@ -1,11 +1,13 @@
 $(document).ready(function(){
 //variables
+
   var round = 1;
   var computerScore = 0;
   var userScore = 0;
   var totalRounds = 0
   $('#clear').hide()
   $('#finalRound').hide()
+  $('#totalRoundsDisplay').hide()
 //ToggleButton Event Listner  
   $('#toggleBtn').on('click', toggle);
 //Function Calls
@@ -32,6 +34,9 @@ $(document).ready(function(){
         eventListeners()
         totalRounds = roundCheck;
         $('#numRounds').hide()
+        $('#totalRoundDisplay').html(totalRounds + ' Rounds').show()
+        $(this).html('Pause')
+
       }
       else{
         alert('NaN')
@@ -42,14 +47,12 @@ $(document).ready(function(){
       $(this).data('state', 'off')
       $('.btn-warning').off()
       $('.btn-info').off()
+      $(this).html('Start')
     }
   }
 
   function gameLogic(){
     if(round <= totalRounds){
-      if(round === totalRounds){
-        $('#finalRound').show()
-      }
       var computerChoices = ['Rock', 'Paper', 'Scissors'];
       var ranNum = Math.floor(Math.random() * computerChoices.length);
       var ranCompChoice = computerChoices[ranNum];
@@ -78,17 +81,19 @@ $(document).ready(function(){
       $('#userDisplay').empty()
       choiceAnimation(ranCompChoice, $(this).data('state'));
       $('#round').html(round)
-      round++
       $('#userScore').html('Player Score: ' + userScore)
       $('#computerScore').html('Computer Score: ' + computerScore)
-    }   
+    } 
+    console.log(round)
+    console.log(totalRounds)
     if(userScore === computerScore && round === totalRounds){
-      $('#tieModal').modal('show')
+      $('#tieDisplay').html('Tie, Next to Score Wins')
       totalRounds++
     }
     else if(round === totalRounds) {
-      gameOverModal()
+      gameOverModal();
     }
+    round++
   }
 
   function choiceAnimation(computer, user){
@@ -109,8 +114,9 @@ $(document).ready(function(){
       $('#gameOver').empty()
       $('#gameOver').append($('<h2>').html('You Win'))
     }
-
-    $('#gameoverModal').modal('show')
+console.log('you here?')
+    $('#gameOverModal').modal('show')
+    //$('#tieModal').modal('show')
     $('.btn-primary').on('click',function(){
       round = 1
       computerScore = 0
