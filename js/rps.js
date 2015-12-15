@@ -130,6 +130,7 @@ $(document).ready(function(){
       $('.btn-default').on('click', function(){
         var userIntials = $('#submitIntials').val()
         scoreBoard(userScore, computerScore, userIntials)
+        $('#submitModal').modal('hide')
         resetGame()
 
       });
@@ -137,12 +138,19 @@ $(document).ready(function(){
   }
 
   function scoreBoard(uS, cS, intials){
+    $('tbody').empty()
     fbase.push({sbUserScore: uS, sbComputerScore: cS, sbIntials: intials});
-    fbase.on('child_added', function(snapshot) {
-      var sbs = snapshot.val();
-      console.log(sbs)
+    fbase.orderByChild("sbUserScore").on("child_added", function(snapshot){
+      var hsData = snapshot.val()
+      var newUserName = hsData.sbIntials
+      var newUserScore = hsData.sbUserScore
+      var newComputerScore = hsData.sbComputerScore
+      console.log(hsData.sbIntials)
+      console.log(newUserScore)
+      console.log(newComputerScore)
+      fillTable(hsData.sbIntials, hsData.sbUserScore, hsData.sbComputerScore);
     });
-    
+
     
 
   }
@@ -162,19 +170,13 @@ $(document).ready(function(){
     $('#round').html('')
     $('#tieDisplay').html('') 
   }
-  // function fillTable(repoCommits){
-  //   var newUserName = $('<td>')
-  //     .append(repoCommits.commit.author.name).append(' : ')
-  //     .append(repoCommits.author.login)
-  //     .attr('id', repoCommits.sha)
-  //     .addClass('shaID')
-  //     .attr('data-commit-href', repoCommits.html_url);
-  //   var newDate = $('<td>').append(repoCommits.commit.author.date)
-  //   var newMessage = $('<td>').append(repoCommits.commit.message)
 
-  //   var newTableRow = $('<tr>').addClass('tableRow').append(newUserName).append(newDate).append(newMessage);
-
-  //   return newTableRow;
-  // }
+  function fillTable(i, u, c){
+    var newUserName = $('<td>').append(i)
+    var newUserScore = $('<td>').append(u)
+    var newComputerScore = $('<td>').append(c)
+    var newTableRow = $('<tr>').append(newUserName).append(newUserScore).append(newComputerScore)
+    $('tbody').append(newTableRow)
+  }
 
 });
